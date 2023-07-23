@@ -1,0 +1,7 @@
+{
+  "name": "CineMagicPlus",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
