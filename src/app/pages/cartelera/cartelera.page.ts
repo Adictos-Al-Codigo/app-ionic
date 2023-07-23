@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TheMoviesDBService } from 'src/app/services/the-movies-db.service';
+
 
 @Component({
   selector: 'app-cartelera',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarteleraPage implements OnInit {
 
-  constructor() { }
+  constructor(private theMoviesDBService:TheMoviesDBService) { }
 
   ngOnInit() {
+    this.Obtener_Estrenos();
   }
 
+  Array_Estrenos:any;
+
+  Obtener_Estrenos(){
+    this.theMoviesDBService.Obtener_Estrenos().subscribe({
+      next: (s) =>{
+        this.Array_Estrenos = s;
+      },
+      error: (err) =>{
+        console.error(err);
+      }
+    })
+  }
 }
