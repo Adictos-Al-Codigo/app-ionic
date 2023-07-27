@@ -8,7 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { CarteleraPageRoutingModule } from './cartelera-routing.module';
 
 import { CarteleraPage } from './cartelera.page';
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
   imports: [
@@ -16,8 +16,8 @@ import { CarteleraPage } from './cartelera.page';
     FormsModule,
     IonicModule,
     CarteleraPageRoutingModule,
-
   ],
-  declarations: [CarteleraPage]
+  declarations: [CarteleraPage],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CarteleraPageModule {}

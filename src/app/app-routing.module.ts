@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'tab-inicial/buscar',
+    redirectTo: 'tab-inicial/cuenta',
     pathMatch: 'full'
   },
   {

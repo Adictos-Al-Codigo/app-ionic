@@ -6,15 +6,26 @@
 
 <ion-content [fullscreen]="true">
 
+  <swiper-container  (slidechange)="swiperSlideChanged($event)"
+  [loop]="true"
+  [pagination]="true">
+    <swiper-slide *ngFor="let estreno of Array_Estrenos.results">
+      <img src="https://image.tmdb.org/t/p/original/{{estreno.poster_path}}" />
+    </swiper-slide>
+  </swiper-container>
+
+  
   <div>
     <ion-grid>
       <ion-row >
-        <ion-col *ngFor="let estrenos of Array_Estrenos.results" size="6">
-          <ion-img src="https://image.tmdb.org/t/p/original/{{estrenos.backdrop_path}}">
+        <ion-col *ngFor="let cartelera of Array_Cartelera.results" size="6">
+          <ion-img src="https://image.tmdb.org/t/p/original/{{cartelera.backdrop_path}}">
   
           </ion-img>
         </ion-col>
       </ion-row>
     </ion-grid>
   </div>
+
+  
 </ion-content>
