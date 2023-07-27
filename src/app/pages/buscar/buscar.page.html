@@ -22,7 +22,7 @@
               <ion-label color="tertiary" class="result_title">
                 {{result.title}}
               </ion-label>
-              <ion-badge class="text_vermas" color="tertiary"  id="open-modal" expand="block">Ver Más</ion-badge>
+              <ion-badge class="text_vermas" (click)="Obtener_Detalle_Pelicula(result.id)" color="tertiary"  (click)="setOpen(true)">Ver Más</ion-badge>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -30,55 +30,22 @@
     </ion-list>
   </div>
 
-  <ion-modal #modal trigger="open-modal" [enterAnimation]="enterAnimation" [leaveAnimation]="leaveAnimation">
+  <ion-modal [isOpen]="isModalOpen" [enterAnimation]="enterAnimation" [leaveAnimation]="leaveAnimation">
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-title>Modal</ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="modal.dismiss()">Close</ion-button>
+            <ion-button (click)="setOpen(false)">Close</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      <ion-content>
-        <ion-list>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Connor Smith</h2>
-              <p>Sales Rep</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=a"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Daniel Smith</h2>
-              <p>Product Designer</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=d"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Greg Smith</h2>
-              <p>Director of Operations</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=e"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Zoey Smith</h2>
-              <p>CEO</p>
-            </ion-label>
-          </ion-item>
-        </ion-list>
+      <ion-content class="ion-padding">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni illum quidem recusandae ducimus quos
+          reprehenderit. Veniam, molestias quos, dolorum consequuntur nisi deserunt omnis id illo sit cum qui. Eaque,
+          dicta.
+        </p>
       </ion-content>
     </ng-template>
   </ion-modal>

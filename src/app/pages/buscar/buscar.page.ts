@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AnimationController } from '@ionic/angular';
 import { TheMoviesDBService } from 'src/app/services/the-movies-db.service';
+import { AnimationController } from '@ionic/angular';
 
 
 @Component({
@@ -10,11 +10,12 @@ import { TheMoviesDBService } from 'src/app/services/the-movies-db.service';
 })
 export class BuscarPage implements OnInit {
 
-  constructor(private theMoviesDBService:TheMoviesDBService, private animationCtrl:AnimationController) { }
+  constructor(private theMoviesDBService:TheMoviesDBService,private animationCtrl: AnimationController) { }
 
 
 
   Busqueda:any;
+  Detalle:any;
 
   ngOnInit() {
     this.handleInput("Doraemon");
@@ -40,6 +41,24 @@ export class BuscarPage implements OnInit {
   }
 
   
+
+  Obtener_Detalle_Pelicula(idPelicula:string){
+    this.theMoviesDBService.Obtener_Detalle(idPelicula).subscribe({
+      next: (s) =>{
+        this.Detalle = s;
+      },
+      error: (err) =>{
+        console.error(err);
+      }
+    });
+  }
+
+  isModalOpen = false;
+
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
+
   enterAnimation = (baseEl: HTMLElement) => {
     const root = baseEl.shadowRoot;
 
@@ -67,5 +86,6 @@ export class BuscarPage implements OnInit {
   leaveAnimation = (baseEl: HTMLElement) => {
     return this.enterAnimation(baseEl).direction('reverse');
   };
+
 
 }
