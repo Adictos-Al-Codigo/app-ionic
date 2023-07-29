@@ -1,0 +1,29 @@
+ion-avatar {
+    --border-radius: 4px;
+    height: 100px;
+    width: 100px;
+  }
+
+.username{
+    font-size: 25px;
+    position: relative;
+    top: -80px;
+    left: 120px;
+}
+
+.correo{
+    font-size: 20px;
+    position: relative;
+    top: -50px;
+    left: 5px;
+}
+
+.container-user{
+    width: 369px;
+    border-bottom: #c5c5c5 solid 2px;
+}
+
+.footer{
+    position: relative;
+    top: 230px;
+}
