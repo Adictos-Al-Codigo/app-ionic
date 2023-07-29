@@ -31,4 +31,10 @@ export class TheMoviesDBService {
   Obtener_Detalle(idPelicula:string){
     return this.httpClient.get("https://api.themoviedb.org/3/movie/" + idPelicula + "?api_key=435a680aac6331beaf591ad78cfc73f9&language=es-ES");
   }
+
+  // Api para los fotogramas de la película
+
+  Obtener_Fotogramas(idPelicula:string){
+    return this.httpClient.get("https://api.themoviedb.org/3/movie/" + idPelicula + "/images?api_key=435a680aac6331beaf591ad78cfc73f9")
+  }
 }

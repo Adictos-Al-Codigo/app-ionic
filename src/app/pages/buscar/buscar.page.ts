@@ -16,6 +16,7 @@ export class BuscarPage implements OnInit {
 
   Busqueda:any;
   Detalle:any;
+  Fotogramas:any;
 
   ngOnInit() {
     this.handleInput("Doraemon");
@@ -46,6 +47,7 @@ export class BuscarPage implements OnInit {
     this.theMoviesDBService.Obtener_Detalle(idPelicula).subscribe({
       next: (s) =>{
         this.Detalle = s;
+        this.Obtener_Fotogramas(idPelicula);
       },
       error: (err) =>{
         console.error(err);
@@ -86,6 +88,17 @@ export class BuscarPage implements OnInit {
   leaveAnimation = (baseEl: HTMLElement) => {
     return this.enterAnimation(baseEl).direction('reverse');
   };
+
+  Obtener_Fotogramas(idPelicula:string){
+    this.theMoviesDBService.Obtener_Fotogramas(idPelicula).subscribe({
+      next: (s) =>{
+        this.Fotogramas = s;
+      },
+      error: (err) =>{
+        console.error(err);
+      }
+    })
+  }
 
 
 }
