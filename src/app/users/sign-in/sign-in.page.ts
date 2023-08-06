@@ -31,8 +31,22 @@ export class SignInPage implements OnInit {
     path: '/assets/anim/animacion_login.json',
   };
 
-  login(){
-    console.log(this.LoginForm.value);
-  }
+  async login(){
+    const loading = await this.loadingCtrl.create();
+    await loading.present();
+    if (this.LoginForm?.valid) {
+        const user = await this.theMoviesDBService.loginUser(this.LoginForm.value.email,this.LoginForm.value.password).catch(error =>{
+          console.log(error);
+          loading.dismiss();
+        })
 
+        if (user) {
+          loading.dismiss();
+          this.router.navigate(['tab-inicial/cuenta']);
+          debugger;
+        }else{
+          console.log('provide correct values.');
+        }
+    }
+  }
 }

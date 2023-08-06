@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import firebase from 'firebase/compat/app';
+import {AngularFireAuth} from '@angular/fire/compat/auth';
+import { User } from 'firebase/auth';
+import { TwitterAuthProvider } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TheMoviesDBService {
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient, private ngFireAuth:AngularFireAuth) { }
 
   Api:string = 'https://api.themoviedb.org/3/';
 
@@ -37,4 +41,27 @@ export class TheMoviesDBService {
   Obtener_Fotogramas(idPelicula:string){
     return this.httpClient.get("https://api.themoviedb.org/3/movie/" + idPelicula + "/images?api_key=435a680aac6331beaf591ad78cfc73f9")
   }
+
+  async registerUser(email:string,password:string){
+    return await this.ngFireAuth.createUserWithEmailAndPassword(email,password)
+  }
+
+  async loginUser(email:string,password:string){
+    return await this.ngFireAuth.signInWithEmailAndPassword(email,password);
+  }
+
+  async resetPassword(email:string){
+    return await this.ngFireAuth.sendPasswordResetEmail(email);
+  }
+
+  getCurrentUser(): Promise<User | null> {
+    return new Promise((resolve, reject) => {
+      this.ngFireAuth.onAuthStateChanged((user) => {
+        resolve(user);
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
+    
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimationController, ToastController } from '@ionic/angular';
+import { User } from 'firebase/auth';
+import { TheMoviesDBService } from 'src/app/services/the-movies-db.service';
 
 @Component({
   selector: 'app-cuenta',
@@ -8,10 +10,14 @@ import { AnimationController, ToastController } from '@ionic/angular';
 })
 export class CuentaPage implements OnInit {
 
-  constructor(private toastController: ToastController, private animationCtrl:AnimationController) { }
+  constructor(private toastController: ToastController, private animationCtrl:AnimationController, private theMoviesDBService:TheMoviesDBService) { }
 
-  ngOnInit() {
+  userProfile: any | null = null;
+
+  async ngOnInit() {
     this.setOpen(true);
+    this.userProfile = await this.theMoviesDBService.getCurrentUser();
+    debugger;
   }
 
   isModalOpen = false;
@@ -67,6 +73,14 @@ export class CuentaPage implements OnInit {
   leaveAnimation = (baseEl: HTMLElement) => {
     return this.enterAnimation(baseEl).direction('reverse');
   };
+
+  async getProfile() {
+    try {
+      this.userProfile = await this.theMoviesDBService.getCurrentUser();
+    } catch (error) {
+      console.error('Error al obtener el perfil:', error);
+    }
+  }
 
 
 }

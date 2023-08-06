@@ -8,7 +8,6 @@ const routes: Routes = [
   },
   {
     path: '',
-    //tab-inicial/cuenta
     redirectTo: '/sign-in',
     pathMatch: 'full'
   },

@@ -32,8 +32,22 @@ export class SignUpPage implements OnInit {
     path: '/assets/anim/animacion_register.json',
   };
 
-  register(){
-    console.log(this.RegistroForm.value);
+  async register(){
+    const loading = await this.loadingCtrl.create();
+    await loading.present();
+    if (this.RegistroForm?.valid) {
+        const user = await this.theMoviesDBService.registerUser(this.RegistroForm.value.email,this.RegistroForm.value.password).catch(error =>{
+          console.log(error);
+          loading.dismiss();
+        })
+
+        if (user) {
+          loading.dismiss();
+          this.router.navigate(['/sign-in'])
+        }else{
+          console.log('provide correct values.');
+        }
+    }
   }
 
 }
