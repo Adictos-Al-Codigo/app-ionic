@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
 import { SignInPageRoutingModule } from './sign-in-routing.module';
 
 import { SignInPage } from './sign-in.page';
+
 
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
@@ -23,7 +24,8 @@ export function playerFactory() {
     FormsModule,
     IonicModule,
     SignInPageRoutingModule,
-    LottieModule.forRoot({ player: playerFactory })
+    LottieModule.forRoot({ player: playerFactory }),
+    ReactiveFormsModule
   ],
   declarations: [SignInPage]
 })

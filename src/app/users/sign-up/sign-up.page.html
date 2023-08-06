@@ -6,22 +6,53 @@
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <form class="space-y-4 md:space-y-6" action="#">
+                <form [formGroup]="RegistroForm" novalidate class="space-y-4 md:space-y-6" action="#">
                   <div>
                     <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Su Usuario o Apodo</label>
-                    <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Username98" required="">
-                </div>
+                    <input formControlName="username" type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Username98" required="">
+                  </div>
+                  <div *ngIf="this.RegistroForm.controls?.['username'].touched && this.RegistroForm.controls?.['username'].invalid">
+                    <ion-text *ngIf="errorControl.username.errors?.required">
+                      Usuario o Apodo es Requerido
+                    </ion-text>
+                  </div>
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Su Correo Electrónico</label>
-                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Correo@compañia.com" required="">
+                        <input formControlName="email" type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Correo@compañia.com" required="">
+                        <div *ngIf="this.RegistroForm.controls?.['email'].touched && this.RegistroForm.controls?.['email'].invalid">
+                          <ion-text *ngIf="errorControl.email.errors?.required">
+                            Correo Electrónico es Requerido
+                          </ion-text>
+                          <ion-text *ngIf="errorControl.email.errors?.pattern">
+                            El Correo Electrónico Debe Ser Valido
+                          </ion-text>
+                        </div>
                     </div>
                     <div>
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Su Contraseña</label>
-                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-                    </div>
+                        <input formControlName="password" type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                        <div *ngIf="this.RegistroForm.controls?.['password'].touched && this.RegistroForm.controls?.['password'].invalid">
+                          <ion-text *ngIf="errorControl.password.errors?.required">
+                            Contraseña es Requerido
+                          </ion-text>
+                          <ion-text *ngIf="errorControl.password.errors?.pattern">
+                            La Contraseña Debe Tener al Menos 8 Digitos: <br> <ion-label color="primary">Un Carácter</ion-label>  <br> <ion-label color="danger">Un Mayúscula</ion-label> <br> <ion-label color="medium">Un Número</ion-label>
+                          </ion-text>
+                        </div>
+                      </div>
+                      <button (click)="register()" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                            Regístrarme
+                        </span>
+                      </button>
                 </form>
             </div>
         </div>
     </div>
+    <ion-fab vertical="bottom" horizontal="end">
+      <ion-fab-button [routerLink]="['/sign-in']">
+        <ion-icon  name="chevron-back"></ion-icon> 
+      </ion-fab-button>
+    </ion-fab>
   </section>
 </ion-content>
