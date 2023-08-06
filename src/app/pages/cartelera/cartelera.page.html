@@ -10,7 +10,7 @@
   [loop]="true"
   [pagination]="true">
     <swiper-slide *ngFor="let estreno of Array_Estrenos.results">
-      <img src="https://image.tmdb.org/t/p/original/{{estreno.poster_path}}" />
+      <img (click)="setOpen(true,estreno.id)" src="https://image.tmdb.org/t/p/original/{{estreno.poster_path}}" />
     </swiper-slide>
   </swiper-container>
 
@@ -19,13 +19,45 @@
     <ion-grid>
       <ion-row >
         <ion-col *ngFor="let cartelera of Array_Cartelera.results" size="6">
-          <ion-img src="https://image.tmdb.org/t/p/original/{{cartelera.backdrop_path}}">
+          <ion-img (click)="setOpen(true,cartelera.id)" src="https://image.tmdb.org/t/p/original/{{cartelera.backdrop_path}}">
   
           </ion-img>
         </ion-col>
       </ion-row>
     </ion-grid>
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
+
+  <ion-modal [isOpen]="isModalOpen" [enterAnimation]="enterAnimation" [leaveAnimation]="leaveAnimation">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Detalle de la Película</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false,'')">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-label class="text-default" color="danger">{{Detalle.title}}</ion-label>
+        <ion-img src="https://image.tmdb.org/t/p/original/{{Detalle.poster_path}}"></ion-img>
+        <ion-label class="text-default text-sinopsis" color="primary">Sipnosis</ion-label>
+        <p class="ion-text-capitalize">
+          {{Detalle.overview}}
+        </p>
+        <ion-label class="text-default text-sinopsis" color="primary">Cuadros</ion-label>
+        <ion-grid>
+          <ion-row>
+            <ion-col *ngFor="let fotogramas of Fotogramas.backdrops" size="4">
+              <ion-img  src="https://image.tmdb.org/t/p/original/{{fotogramas.file_path}}"></ion-img>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 
   
 </ion-content>

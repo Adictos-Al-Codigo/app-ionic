@@ -17,13 +17,13 @@ export class TheMoviesDBService {
   }
 
   // Api para carteleras
-  Obtener_Cartelera(){
-    return this.httpClient.get(this.Api + "movie/upcoming?api_key=43bb95cae941badc90476b9f10f04134&language=es-ES&page=1&adult=true");
+  Obtener_Cartelera(NumPag:String){
+    return this.httpClient.get(this.Api + "movie/upcoming?api_key=43bb95cae941badc90476b9f10f04134&language=es-ES&page=" + NumPag + "&adult=true");
   }
 
   // Api para Búsqueda
-  Obtener_Busqueda(Query:string){
-    return this.httpClient.get(this.Api + "search/movie?api_key=435a680aac6331beaf591ad78cfc73f9&language=es-ES&query=" + Query + "&page=1&include_adult=true")
+  Obtener_Busqueda(Query:string,NumPagina:String){
+    return this.httpClient.get(this.Api + "search/movie?api_key=435a680aac6331beaf591ad78cfc73f9&language=es-ES&query=" + Query + "&page=" + NumPagina + "&include_adult=true")
   }
 
   // Api para detalle de la película

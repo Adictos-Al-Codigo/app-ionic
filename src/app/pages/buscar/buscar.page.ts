@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TheMoviesDBService } from 'src/app/services/the-movies-db.service';
 import { AnimationController } from '@ionic/angular';
-
+import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-buscar',
@@ -10,13 +11,15 @@ import { AnimationController } from '@ionic/angular';
 })
 export class BuscarPage implements OnInit {
 
-  constructor(private theMoviesDBService:TheMoviesDBService,private animationCtrl: AnimationController) { }
+  constructor(private theMoviesDBService:TheMoviesDBService,private animationCtrl: AnimationController,private router:Router) { }
 
 
 
   Busqueda:any;
   Detalle:any;
   Fotogramas:any;
+  NumPagina:number = 1;
+  ValorString!:string;
 
   ngOnInit() {
     this.handleInput("Doraemon");
@@ -27,11 +30,13 @@ export class BuscarPage implements OnInit {
 
     if (Query.value) {
       query = Query.value.toLowerCase();
+      this.ValorString = query;
     }else{
       query = "Dragón Ball";
+      this.ValorString = query;
     }
     
-    this.theMoviesDBService.Obtener_Busqueda(query).subscribe({
+    this.theMoviesDBService.Obtener_Busqueda(query,"1").subscribe({
       next: (s) =>{
         this.Busqueda = s;
       },
@@ -100,5 +105,23 @@ export class BuscarPage implements OnInit {
     })
   }
 
+  private generateItems() {
+    this.NumPagina++;
+    this.theMoviesDBService.Obtener_Busqueda(this.ValorString,this.NumPagina.toString()).subscribe({
+      next: (s) =>{
+        this.Busqueda = s;
+      },
+      error: (err) =>{
+        console.log(err);
+      }
+    })
+  }
+
+  onIonInfinite(ev:any) {
+    this.generateItems();
+    setTimeout(() => {
+      (ev as InfiniteScrollCustomEvent).target.complete();
+    }, 500);
+  }
 
 }

@@ -19,16 +19,39 @@
   </div>
 
   <ion-list lines="full">
-    <ion-item>
+    <ion-item (click)="CambioContrasenaToast('bottom')">
       <ion-label>Cambiar Contraseña</ion-label><ion-icon name="key-outline"></ion-icon>
     </ion-item>
-    <ion-item>
+    <ion-item (click)="CerrarSesionToast('bottom')">
       <ion-label color="danger">Cerrar Sesión</ion-label><ion-icon name="log-out-outline"></ion-icon>
     </ion-item>
   </ion-list>
 
-  <ion-header class="ion-text-center footer">
-    CineMagic - Todos los Derechos Reservados &copy; <br>
-    V1.0
-  </ion-header>
+
+  <ion-modal  [enterAnimation]="enterAnimation" [leaveAnimation]="leaveAnimation" [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title><label class="title-aviso">¡Aviso Importante!</label></ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false)">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <p class="text-aviso">
+          Esta Aplicación Fue Hecha por Jahir Celorio y Todavía se Encuentra en Mejora, No Olvides Seguirme en mis Redes Sociales. =)
+        </p>
+        <ion-label color="tertiary">Redes Sociales</ion-label> <br>
+        <a href="https://www.youtube.com/channel/UCIYsodh6M8pWgJ0Dwpst8Uw" target="_blank"><ion-icon name="logo-youtube" class="icons"></ion-icon></a> 
+        <a href="https://github.com/Adictos-Al-Codigo" target="_blank"><ion-icon name="logo-github" class="icons"></ion-icon></a> 
+        <a href="https://www.facebook.com/jahir.celoriomalave.9/" target="_blank"><ion-icon name="logo-facebook" class="icons"></ion-icon></a> 
+        <a href="https://www.linkedin.com/in/jahir-celorio" target="_blank"><ion-icon name="logo-linkedin" class="icons"></ion-icon></a> 
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-label class="footer">V1.0</ion-label>
+
+
 </ion-content>

@@ -21,9 +21,35 @@ ion-avatar {
 .container-user{
     width: 369px;
     border-bottom: #c5c5c5 solid 2px;
+    position: relative;
+    top: 25px;
+    padding-left: 15px;
 }
 
 .footer{
     position: relative;
     top: 230px;
+    left: 180px;
+    font-weight: 900;
+}
+
+.title-aviso{
+    color: #ff0000;
+}
+
+.text-aviso{
+    color: #3300ff;
+}
+
+ion-modal{
+    height: 250px;
+    position: relative;
+    top: 180px;
+}
+
+.icons{
+    text-decoration: none;
+    color: #000;
+    height: 50px;
+    width: 50px;
 }

@@ -9,3 +9,34 @@ swiper-slide {
   align-items: center;
   justify-content: center;
 }
+
+.img_result{
+  width: 150px;
+  height: 150px;
+}
+
+.result_title{
+  position: relative;
+  top: 3rem;
+  white-space: break-spaces;
+}
+
+ion-item{
+  border-bottom: #b3b3b3 solid 2px;
+  width: 367px;
+}
+
+.text_vermas{
+  position: relative;
+  top: 50px;
+}
+
+.text-default{
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.text-sinopsis{
+  position: relative;
+  left: 140px;
+}
