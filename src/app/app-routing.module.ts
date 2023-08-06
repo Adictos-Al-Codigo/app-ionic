@@ -8,13 +8,31 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'tab-inicial/cuenta',
+    //tab-inicial/cuenta
+    redirectTo: '/sign-in',
     pathMatch: 'full'
   },
   {
     path: 'tab-inicial',
     loadChildren: () => import('./pages/tab-inicial/tab-inicial.module').then( m => m.TabInicialPageModule)
   },
+  {
+    path: 'sign-up',
+    loadChildren: () => import('./users/sign-up/sign-up.module').then( m => m.SignUpPageModule)
+  },
+  {
+    path: 'sign-in',
+    loadChildren: () => import('./users/sign-in/sign-in.module').then( m => m.SignInPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./users/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'email-verification',
+    loadChildren: () => import('./users/email-verification/email-verification.module').then( m => m.EmailVerificationPageModule)
+  },
+
 ];
 
 @NgModule({
