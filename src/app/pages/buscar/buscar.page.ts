@@ -31,6 +31,7 @@ export class BuscarPage implements OnInit {
     if (Query.value) {
       query = Query.value.toLowerCase();
       this.ValorString = query;
+      this.NumPagina= 0;
     }else{
       query = "Dragón Ball";
       this.ValorString = query;
