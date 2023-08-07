@@ -14,9 +14,12 @@ export class CuentaPage implements OnInit {
 
   userProfile: any | null = null;
 
+  email:string;
+
   async ngOnInit() {
     this.setOpen(true);
     this.userProfile = await this.theMoviesDBService.getCurrentUser();
+    this.email = this.userProfile.email;
     debugger;
   }
 
