@@ -4,6 +4,7 @@ import firebase from 'firebase/compat/app';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
 import { User } from 'firebase/auth';
 import { TwitterAuthProvider } from 'firebase/auth';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -66,6 +67,41 @@ export class TheMoviesDBService {
         reject(error);
       });
     });
+  }
+
+      // Sign in with Twitter
+      TwitterAuth() {
+        return this.AuthLogin(new TwitterAuthProvider());
+      }
+  
+  
+      // Auth logic to run auth providers
+      AuthLogin(provider) {
+        return this.ngFireAuth
+          .signInWithPopup(provider)
+          .then((result) => {
+            console.log('You have been successfully logged in!');
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+
+          // Sign in with Google
+    GoogleAuth() {
+      return this.AuthLogin2(new GoogleAuthProvider());
+    }
+
+      // Auth logic to run auth providers
+  AuthLogin2(provider) {
+    return this.
+    ngFireAuth.signInWithPopup(provider)
+      .then((result) => {
+        console.log('You have been successfully logged in!');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
     
 }

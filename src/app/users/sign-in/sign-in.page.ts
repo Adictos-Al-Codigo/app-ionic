@@ -5,6 +5,8 @@ import { LoadingController } from '@ionic/angular';
 import { AnimationOptions } from 'ngx-lottie';
 import { TheMoviesDBService } from 'src/app/services/the-movies-db.service';
 
+
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.page.html',
@@ -15,6 +17,9 @@ export class SignInPage implements OnInit {
   LoginForm!: FormGroup;
 
   constructor(private formBuilder:FormBuilder, private loadingCtrl:LoadingController, private theMoviesDBService:TheMoviesDBService, private router:Router) { }
+
+
+
 
   ngOnInit() {
     this.LoginForm = this.formBuilder.group({
@@ -48,5 +53,20 @@ export class SignInPage implements OnInit {
           console.log('provide correct values.');
         }
     }
+  }
+
+  onClickTwitterLogin(){
+    this.theMoviesDBService.TwitterAuth().then((res) =>{
+    }).catch(err =>{
+      console.log(err);
+    });
+  }
+
+  onClickGoogleLogin(){
+    this.theMoviesDBService.GoogleAuth().then((res) =>{
+      this.router.navigate(['tab-inicial/cuenta']);
+    }).catch(err => {
+      console.log(err);
+    });
   }
 }
