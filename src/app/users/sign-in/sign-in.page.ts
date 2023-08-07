@@ -16,7 +16,7 @@ export class SignInPage implements OnInit {
 
   LoginForm!: FormGroup;
 
-  constructor(private formBuilder:FormBuilder, private loadingCtrl:LoadingController, private theMoviesDBService:TheMoviesDBService, private router:Router) { }
+  constructor(private formBuilder:FormBuilder, private loadingCtrl:LoadingController, public theMoviesDBService:TheMoviesDBService, private router:Router) { }
 
 
 
@@ -57,6 +57,7 @@ export class SignInPage implements OnInit {
 
   onClickTwitterLogin(){
     this.theMoviesDBService.TwitterAuth().then((res) =>{
+      this.router.navigate(['tab-inicial/cuenta']);
     }).catch(err =>{
       console.log(err);
     });
