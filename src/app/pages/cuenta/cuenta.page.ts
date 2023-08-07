@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AnimationController, ToastController } from '@ionic/angular';
 import { User } from 'firebase/auth';
 import { TheMoviesDBService } from 'src/app/services/the-movies-db.service';
@@ -10,17 +11,20 @@ import { TheMoviesDBService } from 'src/app/services/the-movies-db.service';
 })
 export class CuentaPage implements OnInit {
 
-  constructor(private toastController: ToastController, private animationCtrl:AnimationController, private theMoviesDBService:TheMoviesDBService) { }
+  constructor(private toastController: ToastController, private animationCtrl:AnimationController, private theMoviesDBService:TheMoviesDBService, private router:Router) { }
 
   userProfile: any | null = null;
 
   email:string;
+  username:string;
+  apikey:string
 
   async ngOnInit() {
     this.setOpen(true);
     this.userProfile = await this.theMoviesDBService.getCurrentUser();
     this.email = this.userProfile.email;
-    debugger;
+    this.username = localStorage.getItem("username");
+    this.apikey = this.userProfile.auth.config.apiKey;
   }
 
   isModalOpen = false;
@@ -29,25 +33,8 @@ export class CuentaPage implements OnInit {
     this.isModalOpen = isOpen;
   }
 
-  async CambioContrasenaToast(position: 'top' | 'middle' | 'bottom') {
-    const toast = await this.toastController.create({
-      message: 'Tu Contraseña se Cambio con Éxito.',
-      duration: 1500,
-      position: 'bottom',
-    });
 
-    await toast.present();
-  }
 
-  async CerrarSesionToast(position: 'top' | 'middle' | 'bottom') {
-    const toast = await this.toastController.create({
-      message: 'Cerraste Sesión con Éxito.',
-      duration: 1500,
-      position: 'bottom',
-    });
-
-    await toast.present();
-  }
 
   enterAnimation = (baseEl: HTMLElement) => {
     const root = baseEl.shadowRoot;
@@ -85,5 +72,18 @@ export class CuentaPage implements OnInit {
     }
   }
 
+  async Logout(position: 'top' | 'middle' | 'bottom'){
+    this.theMoviesDBService.signOut().then(async () =>{
+      const toast = await this.toastController.create({
+        message: 'Cerraste Sesión con Éxito.',
+        duration: 2000,
+        position: 'bottom',
+      });
+  
+      await toast.present();
+      localStorage.clear();
+      this.router.navigate(['/sign-in']);
+    });
+  }
 
 }

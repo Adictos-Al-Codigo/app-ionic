@@ -12,10 +12,10 @@ ion-avatar {
 }
 
 .correo{
-    font-size: 20px;
+    font-size: 15px;
     position: relative;
     top: -50px;
-    left: 5px;
+    left: 10px;
 }
 
 .container-user{
@@ -28,7 +28,7 @@ ion-avatar {
 
 .footer{
     position: relative;
-    top: 230px;
+    top: 200px;
     left: 180px;
     font-weight: 900;
 }
@@ -52,4 +52,15 @@ ion-modal{
     color: #000;
     height: 50px;
     width: 50px;
+}
+
+.apikey_text{
+    position: relative;
+    left: 160px;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.list-user_account{
+    margin-top: 60px;
 }

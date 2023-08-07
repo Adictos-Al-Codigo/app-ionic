@@ -36,6 +36,7 @@ export class SignUpPage implements OnInit {
     const loading = await this.loadingCtrl.create();
     await loading.present();
     if (this.RegistroForm?.valid) {
+        localStorage.setItem("username",this.RegistroForm.value.username);
         const user = await this.theMoviesDBService.registerUser(this.RegistroForm.value.email,this.RegistroForm.value.password).catch(error =>{
           console.log(error);
           loading.dismiss();

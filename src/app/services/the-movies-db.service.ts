@@ -54,6 +54,10 @@ export class TheMoviesDBService {
     return await this.ngFireAuth.sendPasswordResetEmail(email);
   }
 
+  async signOut(){
+    return await this.ngFireAuth.signOut();
+  }
+
   getCurrentUser(): Promise<User | null> {
     return new Promise((resolve, reject) => {
       this.ngFireAuth.onAuthStateChanged((user) => {
